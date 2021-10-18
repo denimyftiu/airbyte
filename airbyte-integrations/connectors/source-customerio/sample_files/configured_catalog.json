@@ -1,0 +1,358 @@
+{
+    "streams": [
+        {
+            "stream": {
+                "name": "activities",
+                "json_schema": {
+                  "$schema": "http://json-schema.org/draft-04/schema#",
+                  "type": "object",
+                  "properties": {
+                    "customer_id": { "type": ["null", "string"] },
+                    "data": {
+                      "type": ["null", "object"] ,
+                      "properties": {
+                        "delivery_id": { "type": ["null", "string"] },
+                        "opened": { "type": ["null", "string"] },
+                        "delivered": { "type": ["null", "string"] }
+                      }
+                    },
+                    "delivery_id": { "type": ["null", "string"] },
+                    "delivery_type": { "type": ["null", "string"] },
+                    "id": { "type": ["null", "string"] },
+                    "timestamp": { "type": ["null", "integer"] },
+                    "type": {
+                        "type": ["null", "string"], 
+                        "enum": ["page", "event", "attribute_change", "failed_attribute_change", "stripe_event", "drafted_email", "failed_email", "dropped_email", "sent_email", "spammed_email", "bounced_email", "delivered_email", "triggered_email", "opened_email", "clicked_email", "converted_email", "unsubscribed_email", "attempted_email", "undeliverable_email", "device_change", "attempted_action", "drafted_action", "sent_action", "delivered_action", "bounced_action", "failed_action", "converted_action", "undeliverable_action", "opened_action", "secondary:dropped_email", "secondary:spammed_email", "secondary:bounced_email", "secondary:delivered_email", "secondary:opened_email", "secondary:clicked_email", "secondary:failed_email"]
+                    }
+                  }
+                },
+                "supported_sync_modes": ["full_refresh"]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
+        },
+        {
+            "stream": {
+                "name": "broadcasts",
+                "json_schema": {
+                  "$schema": "http://json-schema.org/draft-04/schema#",
+                  "type": "object",
+                  "properties": {
+                    "id": { "type": [ "null", "integer" ] },
+                    "deduplicate_id": { "type": [ "null", "string" ] },
+                    "created": { "type": [ "null", "integer" ] },
+                    "type": { "type": [ "null", "string" ] },
+                    "updated": { "type": [ "null", "integer" ] },
+                    "name": { "type": [ "null", "string" ] },
+                    "active": { "type": "boolean" },
+                    "actions": {
+                      "type": "array",
+                      "items": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": { "type": [ "null", "integer" ] },
+                            "type": { "type": [ "null", "string" ] }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "id": { "type": [ "null", "integer" ] }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "type": { "type": [ "null", "string" ] }
+                          }
+                        }
+                      ]
+                    },
+                    "tags": { "type": [ "null", "string" ] },
+                    "first_started": { "type": [ "null", "integer" ] },
+                    "created_by": { "type": [ "null", "string" ] }
+                  }
+                },
+                "supported_sync_modes": ["full_refresh"]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
+        },
+        {
+            "stream": {
+                "name": "broadcast_metrics",
+                "json_schema": {
+                    "$schema": "http://json-schema.org/draft-04/schema#",
+                    "type": "object",
+                    "properties": {
+                        "metric": {
+                            "type": "object",
+                            "properties": {
+                                "series": {
+                                    "type": "object",
+                                    "properties": {
+                                        "2xx": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "3xx": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "4xx": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "5xx": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "attempted": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "bounced": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "clicked": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "converted": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "created": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "delivered": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "drafted": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "dropped": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "failed": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "opened": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "sent": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "spammed": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "undeliverable": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        },
+                                        "unsubscribed": {
+                                            "type": "array",
+                                            "items": [
+                                                {
+                                                    "type": "integer"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                },
+                                "totals": {
+                                    "type": "object",
+                                    "properties": {
+                                        "2xx": {
+                                            "type": "integer"
+                                        },
+                                        "3xx": {
+                                            "type": "integer"
+                                        },
+                                        "4xx": {
+                                            "type": "integer"
+                                        },
+                                        "5xx": {
+                                            "type": "integer"
+                                        },
+                                        "bounced": {
+                                            "type": "integer"
+                                        },
+                                        "clicked": {
+                                            "type": "integer"
+                                        },
+                                        "converted": {
+                                            "type": "integer"
+                                        },
+                                        "created": {
+                                            "type": "integer"
+                                        },
+                                        "delivered": {
+                                            "type": "integer"
+                                        },
+                                        "drafted": {
+                                            "type": "integer"
+                                        },
+                                        "dropped": {
+                                            "type": "integer"
+                                        },
+                                        "failed": {
+                                            "type": "integer"
+                                        },
+                                        "opened": {
+                                            "type": "integer"
+                                        },
+                                        "sent": {
+                                            "type": "integer"
+                                        },
+                                        "spammed": {
+                                            "type": "integer"
+                                        },
+                                        "undeliverable": {
+                                            "type": "integer"
+                                        },
+                                        "unsubscribed": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "supported_sync_modes": ["full_refresh"]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
+        },
+        {
+            "stream": {
+                "name": "broadcast_metrics_links",
+                "json_schema": {
+                  "$schema": "http://json-schema.org/draft-04/schema#",
+                  "type": "object",
+                  "properties": {
+                    "link": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": [ "null", "integer" ]
+                        },
+                        "href": {
+                          "type": [ "null", "string" ]
+                        }
+                      }
+                    },
+                    "metric": {
+                      "type": "object",
+                      "properties": {
+                        "series": {
+                          "type": "object",
+                          "properties": {
+                            "clicked": {
+                              "type": "array",
+                              "items": [
+                                {
+                                  "type": [ "null", "integer" ]
+                                }
+                              ]
+                            }
+                          }
+                        },
+                        "totals": {
+                          "type": "object",
+                          "properties": {
+                            "clicked": {
+                              "type": [ "null", "integer" ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "supported_sync_modes": ["full_refresh"]
+            },
+            "sync_mode": "full_refresh",
+            "destination_sync_mode": "overwrite"
+        }
+    ]
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "link": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": [ "null", "integer" ]
+        },
+        "href": {
+          "type": [ "null", "string" ]
+        }
+      }
+    },
+    "metric": {
+      "type": "object",
+      "properties": {
+        "series": {
+          "type": "object",
+          "properties": {
+            "clicked": {
+              "type": "array",
+              "items": [
+                {
+                  "type": [ "null", "integer" ]
+                }
+              ]
+            }
+          }
+        },
+        "totals": {
+          "type": "object",
+          "properties": {
+            "clicked": {
+              "type": [ "null", "integer" ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
