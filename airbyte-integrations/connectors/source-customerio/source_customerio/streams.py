@@ -228,3 +228,96 @@ class Campaigns(CustomerioStream):
     ) -> Iterable[Mapping]:
         response_json = response.json()
         yield from response_json.get("campaigns", [])
+
+class CampaignMetrics(CustomerioStream):
+    """
+    API docs: https://customer.io/docs/api/#operation/campaignMetrics
+    """
+
+    name = "campaign_metrics"
+    primary_key = "id"
+
+    def path(self, stream_slice: Mapping[str, Any] = None, **kwargs):
+        campaign_id = stream_slice["campaign_id"]
+        return f"campaigns/{campaign_id}/metrics"
+
+    def next_page_token(
+        self,
+        response: requests.Response
+    ) -> Optional[Mapping[str, Any]]:
+        return None
+
+    def parse_response(
+        self,
+        response: requests.Response,
+        **kwargs
+    ) -> Iterable[Mapping]:
+        yield response.json()
+
+    def read_records(self, stream_slice: Optional[Mapping[str, Any]] = None, **kwargs) -> Iterable[Mapping[str, Any]]:
+        campaigns_stream = Campaigns(authenticator=self.authenticator, region=self.region)
+        for campaign in campaigns_stream.read_records(sync_mode=SyncMode.full_refresh):
+            yield from super().read_records(stream_slice={"campaign_id": campaign["id"]}, **kwargs)
+
+
+class CampaignMetricsLinks(CustomerioStream):
+    """
+    API docs: https://customer.io/docs/api/#operation/campaignLinks
+    """
+
+    name = "campaign_metrics_links"
+    primary_key = "id"
+
+    def path(self, stream_slice: Mapping[str, Any] = None, **kwargs):
+        campaign_id = stream_slice["campaign_id"]
+        return f"campaigns/{campaign_id}/metrics/links"
+
+    def next_page_token(
+        self,
+        response: requests.Response
+    ) -> Optional[Mapping[str, Any]]:
+        return None
+
+    def parse_response(
+        self,
+        response: requests.Response,
+        **kwargs
+    ) -> Iterable[Mapping]:
+        yield response.json()
+
+    def read_records(self, stream_slice: Optional[Mapping[str, Any]] = None, **kwargs) -> Iterable[Mapping[str, Any]]:
+        campaigns_stream = Campaigns(authenticator=self.authenticator, region=self.region)
+        for campaign in campaigns_stream.read_records(sync_mode=SyncMode.full_refresh):
+            yield from super().read_records(stream_slice={"campaign_id": campaign["id"]}, **kwargs)
+
+
+class CampaignActions(CustomerioStream):
+    """
+    API docs: https://customer.io/docs/api/#operation/campaignActions
+    """
+
+    name = "campaign_actions"
+    primary_key = "id"
+
+    def path(self, stream_slice: Mapping[str, Any] = None, **kwargs):
+        campaign_id = stream_slice["campaign_id"]
+        return f"campaigns/{campaign_id}/actions"
+
+    def next_page_token(
+        self,
+        response: requests.Response
+    ) -> Optional[Mapping[str, Any]]:
+        return None
+
+    def parse_response(
+        self,
+        response: requests.Response,
+        **kwargs
+    ) -> Iterable[Mapping]:
+        yield response.json()
+
+    def read_records(self, stream_slice: Optional[Mapping[str, Any]] = None, **kwargs) -> Iterable[Mapping[str, Any]]:
+        campaigns_stream = Campaigns(authenticator=self.authenticator, region=self.region)
+        for campaign in campaigns_stream.read_records(sync_mode=SyncMode.full_refresh):
+            yield from super().read_records(stream_slice={"campaign_id": campaign["id"]}, **kwargs)
+

@@ -16,6 +16,9 @@ from .streams import (
     BroadcastMetricsLinks,
     BroadcastActions,
     Campaigns,
+    CampaignMetrics,
+    CampaignMetricsLinks,
+    CampaignActions,
 )
 
 CONNECTION_ERROR = '''Connection check failed with error: {}.
@@ -48,4 +51,7 @@ class SourceCustomerio(AbstractSource):
             BroadcastMetricsLinks(**args),
             BroadcastActions(**args),
             Campaigns(**args),
+            CampaignMetrics(**args),
+            CampaignMetricsLinks(**args),
+            CampaignActions(**args),
         ]

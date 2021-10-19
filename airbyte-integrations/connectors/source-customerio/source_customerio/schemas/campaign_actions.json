@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": [ "null", "integer" ]
+    },
+    "campaign_id": {
+      "type": [ "null", "integer" ]
+    },
+    "parent_action_id": {
+      "type": [ "null", "integer" ]
+    },
+    "deduplicate_id": {
+      "type": [ "null", "string" ]
+    },
+    "name": {
+      "type": [ "null", "string" ]
+    },
+    "layout": {
+      "type": [ "null", "string" ]
+    },
+    "created": {
+      "type": [ "null", "integer" ]
+    },
+    "updated": {
+      "type": [ "null", "integer" ]
+    },
+    "body": {
+      "type": [ "null", "string" ]
+    },
+    "type": {
+      "type": [ "null", "string" ]
+    },
+    "sending_state": {
+      "type": [ "null", "string" ]
+    },
+    "from": {
+      "type": [ "null", "string" ]
+    },
+    "from_id": {
+      "type": [ "null", "integer" ]
+    },
+    "reply_to": {
+      "type": [ "null", "string" ]
+    },
+    "reply_to_id": {
+      "type": [ "null", "integer" ]
+    },
+    "preprocessor": {
+      "type": [ "null", "string" ]
+    },
+    "recipient": {
+      "type": [ "null", "string" ]
+    },
+    "subject": {
+      "type": [ "null", "string" ]
+    },
+    "bcc": {
+      "type": [ "null", "string" ]
+    },
+    "fake_bcc": {
+      "type": "boolean"
+    },
+    "preheader_text": {
+      "type": [ "null", "string" ]
+    },
+    "headers": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "property1": {
+              "type": [ "null", "string" ]
+            },
+            "property2": {
+              "type": [ "null", "string" ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

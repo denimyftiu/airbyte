@@ -1,0 +1,216 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "metric": {
+      "type": "object",
+      "properties": {
+        "series": {
+          "type": "object",
+          "properties": {
+            "2xx": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "3xx": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "4xx": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "5xx": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "attempted": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "bounced": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "clicked": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "converted": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "created": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "delivered": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "drafted": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "dropped": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "failed": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "opened": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "sent": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "spammed": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "undeliverable": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "unsubscribed": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          }
+        },
+        "totals": {
+          "type": "object",
+          "properties": {
+           "2xx": {
+              "type": "integer"
+            },
+            "3xx": {
+              "type": "integer"
+            },
+            "4xx": {
+              "type": "integer"
+            },
+            "5xx": {
+              "type": "integer"
+            },
+            "bounced": {
+              "type": "integer"
+            },
+            "clicked": {
+              "type": "integer"
+            },
+            "converted": {
+              "type": "integer"
+            },
+            "created": {
+              "type": "integer"
+            },
+            "delivered": {
+              "type": "integer"
+            },
+            "drafted": {
+              "type": "integer"
+            },
+            "dropped": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "opened": {
+              "type": "integer"
+            },
+            "sent": {
+              "type": "integer"
+            },
+            "spammed": {
+              "type": "integer"
+            },
+            "undeliverable": {
+              "type": "integer"
+            },
+            "unsubscribed": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  }
+}
