@@ -10,8 +10,18 @@ from airbyte_cdk.sources.streams import Stream
 from airbyte_cdk.sources.streams.http.auth import TokenAuthenticator
 
 from .streams import (
-    Activities, Broadcasts, BroadcastMetrics, BroadcastMetricsLinks
+    Activities,
+    Broadcasts,
+    BroadcastMetrics,
+    BroadcastMetricsLinks,
+    BroadcastActions,
+    Campaigns,
 )
+
+CONNECTION_ERROR = '''Connection check failed with error: {}.
+Check if the workers IP address is whitelisted in the CustomerIO
+console or if acces token is set up correctly.
+Also you may have configured the wrong region.'''
 
 # Source
 class SourceCustomerio(AbstractSource):
@@ -20,7 +30,7 @@ class SourceCustomerio(AbstractSource):
         try:
             authenticator = TokenAuthenticator(token=config["app_api_key"])
             test_stream = Activities(authenticator=authenticator,
-                                     region=config['region'])
+                                     region=config["region"])
             gen = test_stream.read_records(sync_mode=SyncMode.full_refresh)
             next(gen)
             return True, None
@@ -36,10 +46,6 @@ class SourceCustomerio(AbstractSource):
             Broadcasts(**args),
             BroadcastMetrics(**args),
             BroadcastMetricsLinks(**args),
+            BroadcastActions(**args),
+            Campaigns(**args),
         ]
-
-CONNECTION_ERROR = '''Connection check failed with error: {}.
-Check if the workers IP address is whitelisted in the CustomerIO
-console or if acces token is set up correctly.
-Also you may have configured the wrong region.'''
-

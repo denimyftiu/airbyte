@@ -10,17 +10,17 @@ from airbyte_cdk.sources.streams.http import HttpStream
 
 # Basic full refresh stream
 class CustomerioStream(HttpStream):
-    url_base = ''
+    url_base = ""
 
     def __init__(self, region: str, **kwargs):
         super().__init__(**kwargs)
         self.region = region
-        if region == 'US':
-            self.url_base = 'https://beta-api.customer.io/v1/api/'
-        elif region == 'EU':
-            self.url_base = 'https://beta-api-eu.customer.io/v1/api/'
+        if region == "US":
+            self.url_base = "https://beta-api.customer.io/v1/api/"
+        elif region == "EU":
+            self.url_base = "https://beta-api-eu.customer.io/v1/api/"
         else:
-            raise ValueError('Region must me set to US or EU.')
+            raise ValueError("Region must be set to US or EU.")
 
 # Basic incremental stream
 class IncrementalCustomerioStream(CustomerioStream, ABC):
@@ -39,15 +39,15 @@ class IncrementalCustomerioStream(CustomerioStream, ABC):
 
 
 class Activities(CustomerioStream):
-    '''
+    """
     API docs: https://customer.io/docs/api/#operation/listActivities
     Returns all activities of different types.
     We get all event types for activities.
-    '''
-    primary_key = 'id'
+    """
+    primary_key = "id"
 
     def path(self, **kwargs):
-        return 'activities'
+        return "activities"
 
     def next_page_token(
         self,
@@ -55,9 +55,9 @@ class Activities(CustomerioStream):
     ) -> Optional[Mapping[str, Any]]:
         next_page_token = response.json()
 
-        token = next_page_token.get('next')
+        token = next_page_token.get("next")
         if token:
-            return {'start': token}
+            return {"start": token}
         return {}
                  
 
@@ -83,20 +83,20 @@ class Activities(CustomerioStream):
         **kwargs
     ) -> Iterable[Mapping]:
         response_json = response.json()
-        yield from response_json.get('activities', [])
+        yield from response_json.get("activities", [])
 
 
 class Broadcasts(CustomerioStream):
-    '''
+    """
     API docs: https://customer.io/docs/api/#operation/listBroadcasts 
     Returns all activities of different types.
     We get all event types for activities.
-    '''
-    name = 'broadcasts'
-    primary_key = 'id'
+    """
+    name = "broadcasts"
+    primary_key = "id"
 
     def path(self, **kwargs):
-        return 'broadcasts'
+        return "broadcasts"
 
     def next_page_token(
         self,
@@ -110,7 +110,7 @@ class Broadcasts(CustomerioStream):
         **kwargs
     ) -> Iterable[Mapping]:
         response_json = response.json()
-        yield from response_json.get('broadcasts', [])
+        yield from response_json.get("broadcasts", [])
 
 class BroadcastMetrics(CustomerioStream):
     """
@@ -118,7 +118,7 @@ class BroadcastMetrics(CustomerioStream):
     """
 
     name = "broadcast_metrics"
-    primary_key = 'id'
+    primary_key = "id"
 
     def path(self, stream_slice: Mapping[str, Any] = None, **kwargs):
         broadcast_id = stream_slice["broadcast_id"]
@@ -149,7 +149,7 @@ class BroadcastMetricsLinks(CustomerioStream):
     """
 
     name = "broadcast_metrics_links"
-    primary_key = 'id'
+    primary_key = "id"
 
     def path(self, stream_slice: Mapping[str, Any] = None, **kwargs):
         broadcast_id = stream_slice["broadcast_id"]
@@ -174,32 +174,57 @@ class BroadcastMetricsLinks(CustomerioStream):
             yield from super().read_records(stream_slice={"broadcast_id": broadcast["id"]}, **kwargs)
 
 
-# class BroadcastActions(CustomerioStream):
-#     """
-#     API docs: https://customer.io/docs/api/#operation/broadcastActions
-#     """
-# 
-#     name = "broadcast_actions"
-#     primary_key = 'id'
-# 
-#     def path(self, stream_slice: Mapping[str, Any] = None, **kwargs):
-#         broadcast_id = stream_slice["broadcast_id"]
-#         return f"broadcasts/{broadcast_id}/actions"
-# 
-#     def next_page_token(
-#         self,
-#         response: requests.Response
-#     ) -> Optional[Mapping[str, Any]]:
-#         return None
-# 
-#     def parse_response(
-#         self,
-#         response: requests.Response,
-#         **kwargs
-#     ) -> Iterable[Mapping]:
-#         yield response.json()
-# 
-#     def read_records(self, stream_slice: Optional[Mapping[str, Any]] = None, **kwargs) -> Iterable[Mapping[str, Any]]:
-#         broadcasts_stream = Broadcasts(authenticator=self.authenticator, region=self.region)
-#         for broadcast in broadcasts_stream.read_records(sync_mode=SyncMode.full_refresh):
-#             yield from super().read_records(stream_slice={"broadcast_id": broadcast["id"]}, **kwargs)
+class BroadcastActions(CustomerioStream):
+    """
+    API docs: https://customer.io/docs/api/#operation/broadcastActions
+    """
+
+    name = "broadcast_actions"
+    primary_key = "id"
+
+    def path(self, stream_slice: Mapping[str, Any] = None, **kwargs):
+        broadcast_id = stream_slice["broadcast_id"]
+        return f"broadcasts/{broadcast_id}/actions"
+
+    def next_page_token(
+        self,
+        response: requests.Response
+    ) -> Optional[Mapping[str, Any]]:
+        return None
+
+    def parse_response(
+        self,
+        response: requests.Response,
+        **kwargs
+    ) -> Iterable[Mapping]:
+        yield response.json()
+
+    def read_records(self, stream_slice: Optional[Mapping[str, Any]] = None, **kwargs) -> Iterable[Mapping[str, Any]]:
+        broadcasts_stream = Broadcasts(authenticator=self.authenticator, region=self.region)
+        for broadcast in broadcasts_stream.read_records(sync_mode=SyncMode.full_refresh):
+            yield from super().read_records(stream_slice={"broadcast_id": broadcast["id"]}, **kwargs)
+
+
+class Campaigns(CustomerioStream):
+    """
+    API docs: https://customer.io/docs/api/#operation/listCampaigns
+    """
+    name = "campaigns"
+    primary_key = "id"
+
+    def path(self, **kwargs):
+        return "campaigns"
+
+    def next_page_token(
+        self,
+        response: requests.Response
+    ) -> Optional[Mapping[str, Any]]:
+        pass
+
+    def parse_response(
+        self,
+        response: requests.Response,
+        **kwargs
+    ) -> Iterable[Mapping]:
+        response_json = response.json()
+        yield from response_json.get("campaigns", [])

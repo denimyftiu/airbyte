@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": [ "null", "integer" ]
+    },
+    "deduplicate_id": {
+      "type": [ "null", "string" ]
+    },
+    "name": {
+      "type": [ "null", "string" ]
+    },
+    "type": {
+      "type": [ "null", "string" ]
+    },
+    "created": {
+      "type": [ "null", "integer" ]
+    },
+    "updated": {
+      "type": [ "null", "integer" ]
+    },
+    "filter_segment_ids": {
+      "type": "array",
+      "items": [
+        {
+          "type": [ "null", "integer" ]
+        },
+        {
+          "type": [ "null", "integer" ]
+        }
+      ]
+    },
+    "trigger_segment_ids": {
+      "type": "array",
+      "items": [
+        {
+          "type": [ "null", "integer" ]
+        }
+      ]
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "msg_templates": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": [ "null", "string" ]
+            },
+            "id": {
+              "type": [ "null", "integer" ]
+            }
+          }
+        }
+      ]
+    },
+    "actions": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": [ "null", "string" ]
+            },
+            "id": {
+              "type": [ "null", "integer" ]
+            }
+          }
+        }
+      ]
+    },
+    "first_started": {
+      "type": [ "null", "integer" ]
+    },
+    "created_by": {
+      "type": [ "null", "string" ]
+    },
+    "tags": {
+      "type": "array",
+      "items": [
+        {
+          "type": [ "null", "string" ]
+        }
+      ]
+    }
+  }
+}
