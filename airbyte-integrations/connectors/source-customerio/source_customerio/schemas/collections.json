@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "bytes": {
+      "type": [ "null", "integer" ]
+    },
+    "created_at": {
+      "type": [ "null", "integer" ]
+    },
+    "updated_at": {
+      "type": [ "null", "integer" ]
+    },
+    "id": {
+      "type": [ "null", "integer" ]
+    },
+    "name": {
+      "type": [ "null", "string" ]
+    },
+    "rows": {
+      "type": [ "null", "integer" ]
+    },
+    "schema": {
+      "type": "array",
+      "items": [
+        {
+          "type": [ "null", "string" ]
+        },
+        {
+          "type": [ "null", "string" ]
+        },
+        {
+          "type": [ "null", "string" ]
+        }
+      ]
+    }
+  }
+}

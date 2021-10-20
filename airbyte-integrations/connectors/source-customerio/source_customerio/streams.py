@@ -22,6 +22,7 @@ class CustomerioStream(HttpStream):
         else:
             raise ValueError("Region must be set to US or EU.")
 
+
 # Basic incremental stream
 class IncrementalCustomerioStream(CustomerioStream, ABC):
     state_checkpoint_interval = None
@@ -59,7 +60,6 @@ class Activities(CustomerioStream):
         if token:
             return {"start": token}
         return {}
-                 
 
     def request_params(
         self,
@@ -229,6 +229,7 @@ class Campaigns(CustomerioStream):
         response_json = response.json()
         yield from response_json.get("campaigns", [])
 
+
 class CampaignMetrics(CustomerioStream):
     """
     API docs: https://customer.io/docs/api/#operation/campaignMetrics
@@ -320,4 +321,30 @@ class CampaignActions(CustomerioStream):
         campaigns_stream = Campaigns(authenticator=self.authenticator, region=self.region)
         for campaign in campaigns_stream.read_records(sync_mode=SyncMode.full_refresh):
             yield from super().read_records(stream_slice={"campaign_id": campaign["id"]}, **kwargs)
+
+
+class Collections(CustomerioStream):
+    """
+    API docs: https://customer.io/docs/api/#operation/getCollections
+    """
+
+    name = "collections"
+    primary_key = "id"
+
+    def path(self, **kwargs):
+        return "collections"
+
+    def next_page_token(
+        self,
+        response: requests.Response
+    ) -> Optional[Mapping[str, Any]]:
+        pass
+
+    def parse_response(
+        self,
+        response: requests.Response,
+        **kwargs
+    ) -> Iterable[Mapping]:
+            # Done this way because of NoneType error. Api returns null.
+        return response.json()["collections"] or []
 
